@@ -21,32 +21,32 @@ int **alloc_2d_matrix(int r, int c)
  
 void dealloc_2d_matrix(int **a, int r, int c)
 {
-    	int i;
+    int i;
    	for (i = 0; i < r; ++i)
-        	free(a[i]);
-    	free(a);
+        free(a[i]);
+    free(a);
 }
 
 int ** read_pgm_file(char * file_name, int h, int w)
 {
 	FILE * file;
-    	int i,j, int_tmp;
-    	int** data=alloc_2d_matrix(h,w);
-    	
-    	if ((file = fopen(file_name, "r+")) == NULL)
-	{
-	    printf("ERROR: file open failed\n");
-	    return(NULL);
-	}
+    int i,j, int_tmp;
+    int** data=alloc_2d_matrix(h,w);
+
+    if ((file = fopen(file_name, "r+")) == NULL)
+    {
+        printf("ERROR: file open failed\n");
+        return(NULL);
+    }
 	
 	for (i = 0; i < (h); i++)
-	{
-            for (j = 0; j < (w); j++)
+    { 
+        for (j = 0; j < (w); j++)
 	    {
-		fscanf(file,"%d", &int_tmp);
-		data[i][j] = int_tmp;	
+    		fscanf(file,"%d", &int_tmp);
+    		data[i][j] = int_tmp;	
 	    }
-        }    
+    }    
     fclose(file);
     return data;
 }
