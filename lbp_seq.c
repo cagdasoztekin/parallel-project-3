@@ -5,7 +5,8 @@
 #include "util.h"
 
 #define num_people 18
-#define num_files 15
+#define num_files 10
+#define total_num_files 20
 #define rows 180
 #define cols 200
 void sm(int* asd);
@@ -18,7 +19,7 @@ int main(){
 	for(i = 0; i < num_people; i++){
 		pre_training_set[i] = (int***)malloc(num_files * sizeof(int**));
 	}
-	char filename[80];
+	char filename[97];
 	printf("Hello\n");
 	for(i = 0; i < num_people; i++){
 		for(j = 0; j < num_files; j++){
@@ -43,35 +44,38 @@ int main(){
 
 		}
 	}
-
+	printf("created the training set\n");
 	// test files
+	int**** pre_test_set = (int****)malloc(num_people * sizeof(int***));
+	for(i = 0; i < num_people; i++){
+		pre_test_set[i] = (int***)malloc(sizeof(int**) * (total_num_files - num_files));
+	}
 
-	int** t1_11 = read_pgm_file("/home/cagdas/Desktop/parallel-project-3/images/1.11.txt", rows, cols);
-	int** t1_12 = read_pgm_file("/home/cagdas/Desktop/parallel-project-3/images/1.12.txt", rows, cols);
-	int** t1_13 = read_pgm_file("/home/cagdas/Desktop/parallel-project-3/images/1.13.txt", rows, cols);
-	int** t2_11 = read_pgm_file("/home/cagdas/Desktop/parallel-project-3/images/2.11.txt", rows, cols);
-	int** t2_12 = read_pgm_file("/home/cagdas/Desktop/parallel-project-3/images/2.12.txt", rows, cols);
-	int* h1 = (int*)malloc(sizeof(int) * (rows-2)*(cols-2));;
-	int* h2 = (int*)malloc(sizeof(int) * (rows-2)*(cols-2));;
-	int* h3 = (int*)malloc(sizeof(int) * (rows-2)*(cols-2));;
-	int* h4 = (int*)malloc(sizeof(int) * (rows-2)*(cols-2));;
-	int* h5 = (int*)malloc(sizeof(int) * (rows-2)*(cols-2));;
-	// printf("Here?");
-	create_histogram(h1, t1_11, rows, cols);
-	create_histogram(h2, t1_12, rows, cols);
-	create_histogram(h3, t1_13, rows, cols);
-	create_histogram(h4, t2_11, rows, cols);
-	// printf("Not here\n");
-	create_histogram(h5, t2_12, rows, cols);
-	// for(i = 0; i < (rows-2)*(cols-2); i++){
-		// printf("%d ", h1[i]);
-	// }
-	// printf("Here!");
-	printf("%d\n", find_closest(training_set, num_people, num_files, (rows-2)*(cols-2), h1));
-	printf("%d\n", find_closest(training_set, num_people, num_files, (rows-2)*(cols-2), h2));
-	printf("%d\n", find_closest(training_set, num_people, num_files, (rows-2)*(cols-2), h3));
-	printf("%d\n", find_closest(training_set, num_people, num_files, (rows-2)*(cols-2), h4));
-	printf("%d\n", find_closest(training_set, num_people, num_files, (rows-2)*(cols-2), h5));
+	printf("pre test set\n");
+
+	for(i = 0; i < num_people; i++){
+		for(j = 0; j < (total_num_files - num_files); j++){
+			sprintf(filename, "/home/cagdas/Desktop/parallel-project-3/images/%d.%d.txt", i+1, j+1+num_files);
+			printf("Current name is %s\n", filename);
+			pre_test_set[i][j] = read_pgm_file(filename, rows, cols);
+		}
+	}
+	
+	printf("created pre test set\n");
+	int*** test_set = (int***)malloc(num_people * sizeof(int**));
+	for(i = 0; i < num_people; i++){
+		test_set[i] = (int**)malloc((total_num_files - num_files) * sizeof(int*));
+		for(j = 0; j < total_num_files - num_files; j++){
+			test_set[i][j] = (int*)malloc(sizeof(int) * (rows-2)*(cols-2));
+			create_histogram(test_set[i][j], pre_test_set[i][j], rows, cols);
+		}
+	}
+	printf("np abi\n");
+	for(i = 0; i < num_people; i++){
+		for(j = 0; j < total_num_files - num_files; j++){
+			printf("%d.%d.txt\t%d\t%d\n", i+1, j+1+num_files, i+1, find_closest(training_set, num_people, num_files, (rows-2)*(cols-2), test_set[i][j]));
+		}
+	}
 
 	return 0;
 }
