@@ -5,14 +5,19 @@
 #include "util.h"
 
 #define num_people 18
-#define num_files 10		// this is 'k' as defined in the assignment k = 10 in this case = training set
+#define num_files 10		// this is 'k' as defined in the assignment
 #define total_num_files 20 
 #define rows 180
 #define cols 200
 
+
+
 int main(){
 
 	int i, j;
+
+
+
 
 	// 4d array to have 2 layers for height and width and 2 layers for files and people
 	int**** pre_training_set = (int****)malloc(num_people * sizeof(int***));
@@ -144,12 +149,14 @@ void create_histogram(int* hist, int** img, int num_rows, int num_cols){
 double distance(int* a, int* b, int size){
 	int i;
 	double distance = 0;
+	#pragma omp parallel for private(i)
 	for(i = 0; i < size; i++){
 		// don't change the current sum if both are zero // disrupts the whole thing
 		if(a[i] != 0 || b[i] != 0){
 			distance += (double)(a[i] - b[i])*(a[i] - b[i])/(double)(2*(a[i] + b[i]));
 		}
 	}
+	// #pragma omp barrier
 	// printf("This distance is %f\n", distance);
 	return distance;
 }
@@ -161,7 +168,12 @@ int find_closest(int*** training_set, int num_persons, int num_training, int siz
 	// printf("Double max is %f", closest);
 	double current = 0;
 	int personid = -1;
+	int tid;
+	#pragma omp parallel for private(i,j, tid)
+	
 	for(i = 0; i < num_persons; i++){
+		tid = omp_get_thread_num();
+		// printf("Running on thread %d and i is %d\n", tid, i);
 		for(j = 0; j < num_files; j++){
 			current = distance(training_set[i][j], test_image, size);
 			// printf("Current distance is %f with i %d and j %d\n", current, i, j);
