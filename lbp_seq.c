@@ -5,11 +5,11 @@
 #include "util.h"
 
 #define num_people 18
-#define num_files 10
-#define total_num_files 20
+#define num_files 10		// this is 'k' as defined in the assignment k = 10 in this case = training set
+#define total_num_files 20 
 #define rows 180
 #define cols 200
-void sm(int* asd);
+
 int main(){
 
 	int i, j;
@@ -20,22 +20,23 @@ int main(){
 		pre_training_set[i] = (int***)malloc(num_files * sizeof(int**));
 	}
 	char filename[97];
-	printf("Hello\n");
+	// printf("Hello\n");
 	for(i = 0; i < num_people; i++){
 		for(j = 0; j < num_files; j++){
-			sprintf(filename, "/home/cagdas/Desktop/parallel-project-3/images/%d.%d.txt", i+1, j+1);
+			// sprintf(filename, "/home/cagdas/Desktop/parallel-project-3/images/%d.%d.txt", i+1, j+1);
 			// printf("%s\n", filename);
 			pre_training_set[i][j] = read_pgm_file(filename, rows, cols);
 		}
 	}
 
-	printf("Creating the training set\n");
+	// printf("Creating the training set\n");
 	// the actual training set where the histogram arrays will be held for each file for each person (3 layers!)
 	int*** training_set = (int***)malloc(num_people * sizeof(int**));
 	for(i = 0; i < num_people; i++){
 		training_set[i] = (int**)malloc(num_files * sizeof(int*));
 	}
 
+	// create histograms for each person's each picture
 	for(i = 0; i < num_people; i++){
 		for(j = 0; j < num_files; j++){
 			// printf("Onto it with i %d j %d\n", i, j);
@@ -44,24 +45,24 @@ int main(){
 
 		}
 	}
-	printf("created the training set\n");
+	// printf("created the training set\n");
 	// test files
 	int**** pre_test_set = (int****)malloc(num_people * sizeof(int***));
 	for(i = 0; i < num_people; i++){
 		pre_test_set[i] = (int***)malloc(sizeof(int**) * (total_num_files - num_files));
 	}
 
-	printf("pre test set\n");
+	// printf("pre test set\n");
 
 	for(i = 0; i < num_people; i++){
 		for(j = 0; j < (total_num_files - num_files); j++){
-			sprintf(filename, "/home/cagdas/Desktop/parallel-project-3/images/%d.%d.txt", i+1, j+1+num_files);
-			printf("Current name is %s\n", filename);
+			// sprintf(filename, "/home/cagdas/Desktop/parallel-project-3/images/%d.%d.txt", i+1, j+1+num_files);
+			// printf("Current name is %s\n", filename);
 			pre_test_set[i][j] = read_pgm_file(filename, rows, cols);
 		}
 	}
 	
-	printf("created pre test set\n");
+	// printf("created pre test set\n");
 	int*** test_set = (int***)malloc(num_people * sizeof(int**));
 	for(i = 0; i < num_people; i++){
 		test_set[i] = (int**)malloc((total_num_files - num_files) * sizeof(int*));
@@ -70,18 +71,27 @@ int main(){
 			create_histogram(test_set[i][j], pre_test_set[i][j], rows, cols);
 		}
 	}
-	printf("np abi\n");
+	// printf("np abi\n");
+	int totalCount = 0;
+	int falseCount = 0;
 	for(i = 0; i < num_people; i++){
 		for(j = 0; j < total_num_files - num_files; j++){
-			printf("%d.%d.txt\t%d\t%d\n", i+1, j+1+num_files, i+1, find_closest(training_set, num_people, num_files, (rows-2)*(cols-2), test_set[i][j]));
+			int cur = find_closest(training_set, num_people, num_files, (rows-2)*(cols-2), test_set[i][j]);
+			// test the file with file name "%d.%d.txt\t\t%d\t\t%d\n", i+1, j+1+num_files
+			totalCount++;	// a judgment is made
+			if(cur != i+1){ // a false judgment is made
+				falseCount += 1;
+			}
 		}
 	}
+	printf("%d false out of %d\n", falseCount, totalCount);
+
+	// TODO:: deallocate the allocated memory space
 
 	return 0;
 }
 
-
-
+// convert binary number to decimal
 int toDecimal(int binary){
 	int result = 0;
 	int current = 1;
@@ -96,6 +106,7 @@ int toDecimal(int binary){
 	return result;
 }
 
+// create a histogram of a given image and put the result for each pixel in the 1D hist array 
 void create_histogram(int* hist, int** img, int num_rows, int num_cols){
 	// printf("Hola histo\n");
 	int i, j;
@@ -108,31 +119,33 @@ void create_histogram(int* hist, int** img, int num_rows, int num_cols){
 			int k = img[i][j];
 
 			currentBinary += (k < img[i][j-1]) * base;
-			base *= 10;
+			base *= 2;
 			currentBinary += (k < img[i+1][j-1]) * base;
-			base *= 10;
+			base *= 2;
 			currentBinary += (k < img[i+1][j]) * base;
-			base *= 10;
+			base *= 2;
 			currentBinary += (k < img[i+1][j+1]) * base;
-			base *= 10;
+			base *= 2;
 			currentBinary += (k < img[i][j+1]) * base;
-			base *= 10;
+			base *= 2;
 			currentBinary += (k < img[i-1][j+1]) * base;
-			base *= 10;
+			base *= 2;
 			currentBinary += (k < img[i-1][j]) * base;
-			base *= 10;
+			base *= 2;
 			currentBinary += (k < img[i-1][j-1]) * base;
 			// printf("Current binary is %d\n", toDecimal(currentBinary));
-			hist[(i-1)*(num_cols-2) + (j-1)] = toDecimal(currentBinary);
+			// hist[(i-1)*(num_cols-2) + (j-1)] = toDecimal(currentBinary);
+			hist[(i-1)*(num_cols-2) + (j-1)] = currentBinary;
 		}
 	}
 }
 
+// calculate distance between each histogram
 double distance(int* a, int* b, int size){
 	int i;
 	double distance = 0;
 	for(i = 0; i < size; i++){
-		// printf("a[i] is %f\n", (double)(a[i] - b[i])*(a[i] - b[i])/(double)(2*(a[i] + b[i])));
+		// don't change the current sum if both are zero // disrupts the whole thing
 		if(a[i] != 0 || b[i] != 0){
 			distance += (double)(a[i] - b[i])*(a[i] - b[i])/(double)(2*(a[i] + b[i]));
 		}
