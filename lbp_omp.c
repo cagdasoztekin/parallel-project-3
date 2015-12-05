@@ -29,6 +29,7 @@ int main(int argc, char** argv){
 	}
 	char filename[128];
 	// printf("Hello\n");
+
 	for(i = 0; i < num_people; i++){
 		for(j = 0; j < num_files; j++){
 			sprintf(filename, "/home/cagdas/Desktop/parallel-project-3/images/%d.%d.txt", i+1, j+1);
@@ -49,6 +50,7 @@ int main(int argc, char** argv){
 		for(j = 0; j < num_files; j++){
 			// printf("Onto it with i %d j %d\n", i, j);
 			training_set[i][j] = (int*)malloc(sizeof(int) * 256);
+			#pragma omp parallel for schedule(static)
 			for(b = 0; b < 256; b++){
 				training_set[i][j][b] = 0;
 			}
@@ -107,6 +109,7 @@ int main(int argc, char** argv){
 
 	int a;
 
+	#pragma omp parallel for schedule(static) private(j,a)
 	for(i = 0; i < num_people; i++){
 		for(j = 0; j < num_files; j++){
 			for(a = 0; a < rows; a++){
@@ -119,6 +122,7 @@ int main(int argc, char** argv){
 	free(pre_training_set);
 	// printf("free pre training set\n");
 
+	#pragma omp parallel for schedule(static) private(j,a)
 	for(i = 0; i < num_people; i++){
 		for(j = 0; j < total_num_files - num_files; j++){
 			for(a = 0; a < rows; a++){
@@ -131,6 +135,7 @@ int main(int argc, char** argv){
 	free(pre_test_set);
 	// printf("free pre test set\n");
 
+	#pragma omp parallel for schedule(static) private(j)
 	for(i = 0; i < num_people; i++){
 		for(j = 0; j < num_files; j++){
 			free(training_set[i][j]);
@@ -140,6 +145,7 @@ int main(int argc, char** argv){
 	free(training_set);
 	// printf("free training set\n");
 
+	#pragma omp parallel for schedule(static) private(j)
 	for(i = 0; i < num_people; i++){
 		for(j = 0; j < total_num_files - num_files; j++){
 			free(test_set[i][j]);
@@ -151,21 +157,6 @@ int main(int argc, char** argv){
 
 
 	return 0;
-}
-
-// convert binary number to decimal
-int toDecimal(int binary){
-	int result = 0;
-	int current = 1;
-	int a;
-	while(binary > 0){
-		a = binary % 10;
-		result = result + a * current;
-		binary /= 10;
-		current *= 2;
-	}
-
-	return result;
 }
 
 // create a histogram of a given image and put the result for each pixel in the 1D hist array 
@@ -241,10 +232,11 @@ int find_closest(int*** training_set, int num_persons, int num_training, int siz
 
 	for(i = 0; i < num_persons; i++){
 		// printf("Running on thread %d and i is %d\n", tid, i);
-		// #pragma omp parallel for shared(training_set, test_image, size) private(current)
+		// #pragma omp parallel for schedule(static) private(current, personid) reduction(min: closest)
 		for(j = 0; j < num_files; j++){
 			current = distance(training_set[i][j], test_image, size);
 			// printf("Current distance is %f with i %d and j %d\n", current, i, j);
+			// #pr1agma omp critical
 			if(current <= closest){
 				// printf("IFIFIFCurrent distance is %f with i %d and j %d\n", current, i, j);
 				closest = current;

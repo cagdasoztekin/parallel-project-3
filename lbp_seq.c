@@ -152,21 +152,6 @@ int main(int argc, char** argv){
 	return 0;
 }
 
-// convert binary number to decimal
-int toDecimal(int binary){
-	int result = 0;
-	int current = 1;
-	int a;
-	while(binary > 0){
-		a = binary % 10;
-		result = result + a * current;
-		binary /= 10;
-		current *= 2;
-	}
-
-	return result;
-}
-
 // create a histogram of a given image and put the result for each pixel in the 1D hist array 
 void create_histogram(int* hist, int** img, int num_rows, int num_cols){
 	// printf("Hola histo\n");
@@ -205,15 +190,14 @@ void create_histogram(int* hist, int** img, int num_rows, int num_cols){
 double distance(int* a, int* b, int size){
 	int i;
 	double distance = 0;
-	// #pragma omp parallel for private(i)
+
 	for(i = 0; i < size; i++){
 		// don't change the current sum if both are zero // disrupts the whole thing
 		if(a[i] != 0 || b[i] != 0){
 			distance += (double)(a[i] - b[i])*(a[i] - b[i])/(double)(2*(a[i] + b[i]));
 		}
 	}
-	
-	// #pragma omp barrier
+
 	// printf("This distance is %f\n", distance);
 	return distance;
 }
