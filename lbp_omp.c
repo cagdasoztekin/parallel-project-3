@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <limits.h>
 #include <float.h>
+#include <time.h>
 #include "util.h"
 
 #define num_people 18
@@ -16,8 +17,12 @@ int num_files;
 void create_histogram(int* hist, int** img, int num_rows, int num_cols);
 int find_closest(int*** training_set, int num_persons, int num_training, int size, int* test_image);
 
-int main(int argc, char** argv){
+clock_t begin, end, beginp, endp;
+double time_spent, time_spentp = 0;
 
+int main(int argc, char** argv){
+	
+	begin = clock();
 	int i, j;
 	int b; 
 	num_files = atoi(argv[1]);
@@ -50,10 +55,13 @@ int main(int argc, char** argv){
 		for(j = 0; j < num_files; j++){
 			// printf("Onto it with i %d j %d\n", i, j);
 			training_set[i][j] = (int*)malloc(sizeof(int) * 256);
+			beginp = clock();
 			#pragma omp parallel for schedule(static)
 			for(b = 0; b < 256; b++){
 				training_set[i][j][b] = 0;
 			}
+			endp = clock();
+			time_spentp += (double)(endp - beginp);
 			create_histogram(training_set[i][j], pre_training_set[i][j], rows, cols);
 
 		}
@@ -103,12 +111,13 @@ int main(int argc, char** argv){
 			}
 		}
 	}
-	printf("%d false out of %d\n", falseCount, totalCount);
+	printf("Accuracy: %d correct answers for %d tests Parallel\n", totalCount - falseCount, totalCount);
 
 	// TODO:: deallocate the allocated memory space
 
 	int a;
 
+	beginp = clock();
 	#pragma omp parallel for schedule(static) private(j,a)
 	for(i = 0; i < num_people; i++){
 		for(j = 0; j < num_files; j++){
@@ -119,6 +128,8 @@ int main(int argc, char** argv){
 		}
 		free(pre_training_set[i]);
 	}
+	endp = clock();
+	time_spentp += (double)(endp - beginp);
 	free(pre_training_set);
 	// printf("free pre training set\n");
 
@@ -135,6 +146,7 @@ int main(int argc, char** argv){
 	free(pre_test_set);
 	// printf("free pre test set\n");
 
+	beginp = clock();
 	#pragma omp parallel for schedule(static) private(j)
 	for(i = 0; i < num_people; i++){
 		for(j = 0; j < num_files; j++){
@@ -142,9 +154,13 @@ int main(int argc, char** argv){
 		}
 		free(training_set[i]);
 	}
+	endp = clock();
+	time_spentp += (double)(endp - beginp);
 	free(training_set);
+
 	// printf("free training set\n");
 
+	beginp = clock();
 	#pragma omp parallel for schedule(static) private(j)
 	for(i = 0; i < num_people; i++){
 		for(j = 0; j < total_num_files - num_files; j++){
@@ -152,9 +168,15 @@ int main(int argc, char** argv){
 		}
 		free(test_set[i]);
 	}
+	endp = clock();
+	time_spentp += (double)(endp - beginp);
 	free(test_set);
 	// printf("free test set\n");
 
+	end = clock();
+	time_spent = (double)(end-begin);
+	printf("Total runtime: %f\n", time_spent/CLOCKS_PER_SEC);
+	printf("Sequential runtime: %f\n", (time_spent - time_spentp)/CLOCKS_PER_SEC);
 
 	return 0;
 }
@@ -174,6 +196,7 @@ void create_histogram(int* hist, int** img, int num_rows, int num_cols){
 	for(i = 1; i < num_rows - 1; i++){
 		// #pragma omp parallel for private(base, k, currentBinary)
 		// #pragma omp parallel for schedule(dynamic)
+		beginp = clock();
 		#pragma omp parallel for private(k) firstprivate(base, currentBinary)
 		for(j = 1; j < num_cols - 1; j++){
 
@@ -201,6 +224,8 @@ void create_histogram(int* hist, int** img, int num_rows, int num_cols){
 			#pragma omp atomic
 			hist[currentBinary] += 1;
 		}
+		endp = clock();
+		time_spentp += (double)(endp - beginp);
 	}
 }
 
@@ -208,6 +233,7 @@ void create_histogram(int* hist, int** img, int num_rows, int num_cols){
 double distance(int* a, int* b, int size){
 	int i;
 	double distance = 0;
+	beginp = clock();
 	#pragma omp parallel for reduction(+:distance)
 	for(i = 0; i < size; i++){
 		// don't change the current sum if both are zero // disrupts the whole thing
@@ -215,6 +241,8 @@ double distance(int* a, int* b, int size){
 			distance += (double)(a[i] - b[i])*(a[i] - b[i])/(double)(2*(a[i] + b[i]));
 		}
 	}
+	endp = clock();
+	time_spentp += (double)(endp - beginp);
 
 	// #pragma omp barrier
 	// printf("This distance is %f\n", distance);

@@ -1,14 +1,33 @@
-Results for k=1 \n
+5.16.txt		5		6
+7.13.txt		7		12
+7.14.txt		7		12
+13.5.txt		13		7
+13.6.txt		13		7
+13.11.txt		13		7
+13.12.txt		13		7
+13.13.txt		13		7
+13.14.txt		13		3
+18.3.txt		18		13
+18.10.txt		18		7
+18.11.txt		18		7
+18.12.txt		18		7
+18.13.txt		18		7
+18.14.txt		18		7
+18.15.txt		18		7
+16 false out of 342
+Total runtime: 1.969573
+Results for k=1
 Flat profile:
 
 Each sample counts as 0.01 seconds.
   %   cumulative   self              self     total           
  time   seconds   seconds    calls  ms/call  ms/call  name    
- 82.03      0.48     0.48      360     1.32     1.32  create_histogram
- 13.82      0.56     0.08      360     0.22     0.22  read_pgm_file
-  3.45      0.58     0.02     6156     0.00     0.00  distance
-  0.00      0.58     0.00      360     0.00     0.00  alloc_2d_matrix
-  0.00      0.58     0.00      342     0.00     0.06  find_closest
+ 79.95      0.46     0.46      360     1.27     1.27  create_histogram
+ 12.30      0.53     0.07      360     0.19     0.19  read_pgm_file
+  3.51      0.55     0.02     6156     0.00     0.00  distance
+  1.76      0.56     0.01                             main
+  0.00      0.56     0.00      360     0.00     0.00  alloc_2d_matrix
+  0.00      0.56     0.00      342     0.00     0.06  find_closest
 
  %         the percentage of the total running time of the
 time       program used by this function.
@@ -46,27 +65,27 @@ notice and this notice are preserved.
 		     Call graph (explanation follows)
 
 
-granularity: each sample hit covers 2 byte(s) for 1.74% of 0.58 seconds
+granularity: each sample hit covers 2 byte(s) for 1.80% of 0.56 seconds
 
 index % time    self  children    called     name
                                                  <spontaneous>
-[1]    100.0    0.00    0.58                 main [1]
-                0.48    0.00     360/360         create_histogram [2]
-                0.08    0.00     360/360         read_pgm_file [3]
+[1]    100.0    0.01    0.55                 main [1]
+                0.46    0.00     360/360         create_histogram [2]
+                0.07    0.00     360/360         read_pgm_file [3]
                 0.00    0.02     342/342         find_closest [5]
 -----------------------------------------------
-                0.48    0.00     360/360         main [1]
-[2]     82.6    0.48    0.00     360         create_histogram [2]
+                0.46    0.00     360/360         main [1]
+[2]     82.0    0.46    0.00     360         create_histogram [2]
 -----------------------------------------------
-                0.08    0.00     360/360         main [1]
-[3]     13.9    0.08    0.00     360         read_pgm_file [3]
+                0.07    0.00     360/360         main [1]
+[3]     12.6    0.07    0.00     360         read_pgm_file [3]
                 0.00    0.00     360/360         alloc_2d_matrix [6]
 -----------------------------------------------
                 0.02    0.00    6156/6156        find_closest [5]
-[4]      3.5    0.02    0.00    6156         distance [4]
+[4]      3.6    0.02    0.00    6156         distance [4]
 -----------------------------------------------
                 0.00    0.02     342/342         main [1]
-[5]      3.5    0.00    0.02     342         find_closest [5]
+[5]      3.6    0.00    0.02     342         find_closest [5]
                 0.02    0.00    6156/6156        distance [4]
 -----------------------------------------------
                 0.00    0.00     360/360         read_pgm_file [3]
@@ -163,19 +182,31 @@ notice and this notice are preserved.
 
 Index by function name
 
-   [6] alloc_2d_matrix         [4] distance                [3] read_pgm_file
-   [2] create_histogram        [5] find_closest
-Results for k=2 \n
+   [6] alloc_2d_matrix         [4] distance                [1] main
+   [2] create_histogram        [5] find_closest            [3] read_pgm_file
+7.13.txt		7		12
+7.14.txt		7		12
+18.3.txt		18		13
+18.9.txt		18		13
+18.10.txt		18		13
+18.11.txt		18		13
+18.12.txt		18		7
+18.13.txt		18		7
+18.14.txt		18		13
+18.15.txt		18		13
+10 false out of 324
+Total runtime: 2.046009
+Results for k=2
 Flat profile:
 
 Each sample counts as 0.01 seconds.
   %   cumulative   self              self     total           
  time   seconds   seconds    calls  ms/call  ms/call  name    
- 76.31      0.48     0.48      360     1.34     1.34  create_histogram
- 15.90      0.58     0.10      360     0.28     0.28  read_pgm_file
-  7.95      0.63     0.05    11664     0.00     0.00  distance
-  0.00      0.63     0.00      360     0.00     0.00  alloc_2d_matrix
-  0.00      0.63     0.00      324     0.00     0.15  find_closest
+ 76.93      0.53     0.53      360     1.47     1.47  create_histogram
+ 13.06      0.62     0.09      360     0.25     0.25  read_pgm_file
+  8.71      0.68     0.06    11664     0.01     0.01  distance
+  0.00      0.68     0.00      360     0.00     0.00  alloc_2d_matrix
+  0.00      0.68     0.00      324     0.00     0.19  find_closest
 
  %         the percentage of the total running time of the
 time       program used by this function.
@@ -213,528 +244,537 @@ notice and this notice are preserved.
 		     Call graph (explanation follows)
 
 
-granularity: each sample hit covers 2 byte(s) for 1.58% of 0.63 seconds
+granularity: each sample hit covers 2 byte(s) for 1.47% of 0.68 seconds
 
 index % time    self  children    called     name
                                                  <spontaneous>
-[1]    100.0    0.00    0.63                 main [1]
-                0.48    0.00     360/360         create_histogram [2]
-                0.10    0.00     360/360         read_pgm_file [3]
-                0.00    0.05     324/324         find_closest [5]
+[1]    100.0    0.00    0.68                 main [1]
+                0.53    0.00     360/360         create_histogram [2]
+                0.09    0.00     360/360         read_pgm_file [3]
+                0.00    0.06     324/324         find_closest [5]
 -----------------------------------------------
-                0.48    0.00     360/360         main [1]
-[2]     76.2    0.48    0.00     360         create_histogram [2]
------------------------------------------------
-                0.10    0.00     360/360         main [1]
-[3]     15.9    0.10    0.00     360         read_pgm_file [3]
-                0.00    0.00     360/360         alloc_2d_matrix [6]
------------------------------------------------
-                0.05    0.00   11664/11664       find_closest [5]
-[4]      7.9    0.05    0.00   11664         distance [4]
------------------------------------------------
-                0.00    0.05     324/324         main [1]
-[5]      7.9    0.00    0.05     324         find_closest [5]
-                0.05    0.00   11664/11664       distance [4]
------------------------------------------------
-                0.00    0.00     360/360         read_pgm_file [3]
-[6]      0.0    0.00    0.00     360         alloc_2d_matrix [6]
------------------------------------------------
-
- This table describes the call tree of the program, and was sorted by
- the total amount of time spent in each function and its children.
-
- Each entry in this table consists of several lines.  The line with the
- index number at the left hand margin lists the current function.
- The lines above it list the functions that called this function,
- and the lines below it list the functions this one called.
- This line lists:
-     index	A unique number given to each element of the table.
-		Index numbers are sorted numerically.
-		The index number is printed next to every function name so
-		it is easier to look up where the function is in the table.
-
-     % time	This is the percentage of the `total' time that was spent
-		in this function and its children.  Note that due to
-		different viewpoints, functions excluded by options, etc,
-		these numbers will NOT add up to 100%.
-
-     self	This is the total amount of time spent in this function.
-
-     children	This is the total amount of time propagated into this
-		function by its children.
-
-     called	This is the number of times the function was called.
-		If the function called itself recursively, the number
-		only includes non-recursive calls, and is followed by
-		a `+' and the number of recursive calls.
-
-     name	The name of the current function.  The index number is
-		printed after it.  If the function is a member of a
-		cycle, the cycle number is printed between the
-		function's name and the index number.
-
-
- For the function's parents, the fields have the following meanings:
-
-     self	This is the amount of time that was propagated directly
-		from the function into this parent.
-
-     children	This is the amount of time that was propagated from
-		the function's children into this parent.
-
-     called	This is the number of times this parent called the
-		function `/' the total number of times the function
-		was called.  Recursive calls to the function are not
-		included in the number after the `/'.
-
-     name	This is the name of the parent.  The parent's index
-		number is printed after it.  If the parent is a
-		member of a cycle, the cycle number is printed between
-		the name and the index number.
-
- If the parents of the function cannot be determined, the word
- `<spontaneous>' is printed in the `name' field, and all the other
- fields are blank.
-
- For the function's children, the fields have the following meanings:
-
-     self	This is the amount of time that was propagated directly
-		from the child into the function.
-
-     children	This is the amount of time that was propagated from the
-		child's children to the function.
-
-     called	This is the number of times the function called
-		this child `/' the total number of times the child
-		was called.  Recursive calls by the child are not
-		listed in the number after the `/'.
-
-     name	This is the name of the child.  The child's index
-		number is printed after it.  If the child is a
-		member of a cycle, the cycle number is printed
-		between the name and the index number.
-
- If there are any cycles (circles) in the call graph, there is an
- entry for the cycle-as-a-whole.  This entry shows who called the
- cycle (as parents) and the members of the cycle (as children.)
- The `+' recursive calls entry shows the number of function calls that
- were internal to the cycle, and the calls entry for each member shows,
- for that member, how many times it was called from other members of
- the cycle.
-
-Copyright (C) 2012 Free Software Foundation, Inc.
-
-Copying and distribution of this file, with or without modification,
-are permitted in any medium without royalty provided the copyright
-notice and this notice are preserved.
-
-Index by function name
-
-   [6] alloc_2d_matrix         [4] distance                [3] read_pgm_file
-   [2] create_histogram        [5] find_closest
-Results for k=5 \n
-Flat profile:
-
-Each sample counts as 0.01 seconds.
-  %   cumulative   self              self     total           
- time   seconds   seconds    calls  ms/call  ms/call  name    
- 67.67      0.50     0.50      360     1.39     1.39  create_histogram
- 16.24      0.62     0.12      360     0.33     0.33  read_pgm_file
- 14.89      0.73     0.11    24300     0.00     0.00  distance
-  1.35      0.74     0.01      270     0.04     0.45  find_closest
-  0.00      0.74     0.00      360     0.00     0.00  alloc_2d_matrix
-
- %         the percentage of the total running time of the
-time       program used by this function.
-
-cumulative a running sum of the number of seconds accounted
- seconds   for by this function and those listed above it.
-
- self      the number of seconds accounted for by this
-seconds    function alone.  This is the major sort for this
-           listing.
-
-calls      the number of times this function was invoked, if
-           this function is profiled, else blank.
- 
- self      the average number of milliseconds spent in this
-ms/call    function per call, if this function is profiled,
-	   else blank.
-
- total     the average number of milliseconds spent in this
-ms/call    function and its descendents per call, if this 
-	   function is profiled, else blank.
-
-name       the name of the function.  This is the minor sort
-           for this listing. The index shows the location of
-	   the function in the gprof listing. If the index is
-	   in parenthesis it shows where it would appear in
-	   the gprof listing if it were to be printed.
-
-Copyright (C) 2012 Free Software Foundation, Inc.
-
-Copying and distribution of this file, with or without modification,
-are permitted in any medium without royalty provided the copyright
-notice and this notice are preserved.
-
-		     Call graph (explanation follows)
-
-
-granularity: each sample hit covers 2 byte(s) for 1.35% of 0.74 seconds
-
-index % time    self  children    called     name
-                                                 <spontaneous>
-[1]    100.0    0.00    0.74                 main [1]
-                0.50    0.00     360/360         create_histogram [2]
-                0.12    0.00     360/360         read_pgm_file [3]
-                0.01    0.11     270/270         find_closest [4]
------------------------------------------------
-                0.50    0.00     360/360         main [1]
-[2]     67.6    0.50    0.00     360         create_histogram [2]
------------------------------------------------
-                0.12    0.00     360/360         main [1]
-[3]     16.2    0.12    0.00     360         read_pgm_file [3]
-                0.00    0.00     360/360         alloc_2d_matrix [6]
------------------------------------------------
-                0.01    0.11     270/270         main [1]
-[4]     16.2    0.01    0.11     270         find_closest [4]
-                0.11    0.00   24300/24300       distance [5]
------------------------------------------------
-                0.11    0.00   24300/24300       find_closest [4]
-[5]     14.9    0.11    0.00   24300         distance [5]
------------------------------------------------
-                0.00    0.00     360/360         read_pgm_file [3]
-[6]      0.0    0.00    0.00     360         alloc_2d_matrix [6]
------------------------------------------------
-
- This table describes the call tree of the program, and was sorted by
- the total amount of time spent in each function and its children.
-
- Each entry in this table consists of several lines.  The line with the
- index number at the left hand margin lists the current function.
- The lines above it list the functions that called this function,
- and the lines below it list the functions this one called.
- This line lists:
-     index	A unique number given to each element of the table.
-		Index numbers are sorted numerically.
-		The index number is printed next to every function name so
-		it is easier to look up where the function is in the table.
-
-     % time	This is the percentage of the `total' time that was spent
-		in this function and its children.  Note that due to
-		different viewpoints, functions excluded by options, etc,
-		these numbers will NOT add up to 100%.
-
-     self	This is the total amount of time spent in this function.
-
-     children	This is the total amount of time propagated into this
-		function by its children.
-
-     called	This is the number of times the function was called.
-		If the function called itself recursively, the number
-		only includes non-recursive calls, and is followed by
-		a `+' and the number of recursive calls.
-
-     name	The name of the current function.  The index number is
-		printed after it.  If the function is a member of a
-		cycle, the cycle number is printed between the
-		function's name and the index number.
-
-
- For the function's parents, the fields have the following meanings:
-
-     self	This is the amount of time that was propagated directly
-		from the function into this parent.
-
-     children	This is the amount of time that was propagated from
-		the function's children into this parent.
-
-     called	This is the number of times this parent called the
-		function `/' the total number of times the function
-		was called.  Recursive calls to the function are not
-		included in the number after the `/'.
-
-     name	This is the name of the parent.  The parent's index
-		number is printed after it.  If the parent is a
-		member of a cycle, the cycle number is printed between
-		the name and the index number.
-
- If the parents of the function cannot be determined, the word
- `<spontaneous>' is printed in the `name' field, and all the other
- fields are blank.
-
- For the function's children, the fields have the following meanings:
-
-     self	This is the amount of time that was propagated directly
-		from the child into the function.
-
-     children	This is the amount of time that was propagated from the
-		child's children to the function.
-
-     called	This is the number of times the function called
-		this child `/' the total number of times the child
-		was called.  Recursive calls by the child are not
-		listed in the number after the `/'.
-
-     name	This is the name of the child.  The child's index
-		number is printed after it.  If the child is a
-		member of a cycle, the cycle number is printed
-		between the name and the index number.
-
- If there are any cycles (circles) in the call graph, there is an
- entry for the cycle-as-a-whole.  This entry shows who called the
- cycle (as parents) and the members of the cycle (as children.)
- The `+' recursive calls entry shows the number of function calls that
- were internal to the cycle, and the calls entry for each member shows,
- for that member, how many times it was called from other members of
- the cycle.
-
-Copyright (C) 2012 Free Software Foundation, Inc.
-
-Copying and distribution of this file, with or without modification,
-are permitted in any medium without royalty provided the copyright
-notice and this notice are preserved.
-
-Index by function name
-
-   [6] alloc_2d_matrix         [5] distance                [3] read_pgm_file
-   [2] create_histogram        [4] find_closest
-Results for k=7 \n
-Flat profile:
-
-Each sample counts as 0.01 seconds.
-  %   cumulative   self              self     total           
- time   seconds   seconds    calls  ms/call  ms/call  name    
- 64.97      0.48     0.48      360     1.34     1.34  create_histogram
- 17.60      0.61     0.13    29484     0.00     0.00  distance
- 16.24      0.73     0.12      360     0.33     0.36  read_pgm_file
-  1.35      0.74     0.01      360     0.03     0.03  alloc_2d_matrix
-  0.00      0.74     0.00      234     0.00     0.56  find_closest
-
- %         the percentage of the total running time of the
-time       program used by this function.
-
-cumulative a running sum of the number of seconds accounted
- seconds   for by this function and those listed above it.
-
- self      the number of seconds accounted for by this
-seconds    function alone.  This is the major sort for this
-           listing.
-
-calls      the number of times this function was invoked, if
-           this function is profiled, else blank.
- 
- self      the average number of milliseconds spent in this
-ms/call    function per call, if this function is profiled,
-	   else blank.
-
- total     the average number of milliseconds spent in this
-ms/call    function and its descendents per call, if this 
-	   function is profiled, else blank.
-
-name       the name of the function.  This is the minor sort
-           for this listing. The index shows the location of
-	   the function in the gprof listing. If the index is
-	   in parenthesis it shows where it would appear in
-	   the gprof listing if it were to be printed.
-
-Copyright (C) 2012 Free Software Foundation, Inc.
-
-Copying and distribution of this file, with or without modification,
-are permitted in any medium without royalty provided the copyright
-notice and this notice are preserved.
-
-		     Call graph (explanation follows)
-
-
-granularity: each sample hit covers 2 byte(s) for 1.35% of 0.74 seconds
-
-index % time    self  children    called     name
-                                                 <spontaneous>
-[1]    100.0    0.00    0.74                 main [1]
-                0.48    0.00     360/360         create_histogram [2]
-                0.12    0.01     360/360         read_pgm_file [4]
-                0.00    0.13     234/234         find_closest [5]
------------------------------------------------
-                0.48    0.00     360/360         main [1]
-[2]     64.9    0.48    0.00     360         create_histogram [2]
------------------------------------------------
-                0.13    0.00   29484/29484       find_closest [5]
-[3]     17.6    0.13    0.00   29484         distance [3]
------------------------------------------------
-                0.12    0.01     360/360         main [1]
-[4]     17.6    0.12    0.01     360         read_pgm_file [4]
-                0.01    0.00     360/360         alloc_2d_matrix [6]
------------------------------------------------
-                0.00    0.13     234/234         main [1]
-[5]     17.6    0.00    0.13     234         find_closest [5]
-                0.13    0.00   29484/29484       distance [3]
------------------------------------------------
-                0.01    0.00     360/360         read_pgm_file [4]
-[6]      1.4    0.01    0.00     360         alloc_2d_matrix [6]
------------------------------------------------
-
- This table describes the call tree of the program, and was sorted by
- the total amount of time spent in each function and its children.
-
- Each entry in this table consists of several lines.  The line with the
- index number at the left hand margin lists the current function.
- The lines above it list the functions that called this function,
- and the lines below it list the functions this one called.
- This line lists:
-     index	A unique number given to each element of the table.
-		Index numbers are sorted numerically.
-		The index number is printed next to every function name so
-		it is easier to look up where the function is in the table.
-
-     % time	This is the percentage of the `total' time that was spent
-		in this function and its children.  Note that due to
-		different viewpoints, functions excluded by options, etc,
-		these numbers will NOT add up to 100%.
-
-     self	This is the total amount of time spent in this function.
-
-     children	This is the total amount of time propagated into this
-		function by its children.
-
-     called	This is the number of times the function was called.
-		If the function called itself recursively, the number
-		only includes non-recursive calls, and is followed by
-		a `+' and the number of recursive calls.
-
-     name	The name of the current function.  The index number is
-		printed after it.  If the function is a member of a
-		cycle, the cycle number is printed between the
-		function's name and the index number.
-
-
- For the function's parents, the fields have the following meanings:
-
-     self	This is the amount of time that was propagated directly
-		from the function into this parent.
-
-     children	This is the amount of time that was propagated from
-		the function's children into this parent.
-
-     called	This is the number of times this parent called the
-		function `/' the total number of times the function
-		was called.  Recursive calls to the function are not
-		included in the number after the `/'.
-
-     name	This is the name of the parent.  The parent's index
-		number is printed after it.  If the parent is a
-		member of a cycle, the cycle number is printed between
-		the name and the index number.
-
- If the parents of the function cannot be determined, the word
- `<spontaneous>' is printed in the `name' field, and all the other
- fields are blank.
-
- For the function's children, the fields have the following meanings:
-
-     self	This is the amount of time that was propagated directly
-		from the child into the function.
-
-     children	This is the amount of time that was propagated from the
-		child's children to the function.
-
-     called	This is the number of times the function called
-		this child `/' the total number of times the child
-		was called.  Recursive calls by the child are not
-		listed in the number after the `/'.
-
-     name	This is the name of the child.  The child's index
-		number is printed after it.  If the child is a
-		member of a cycle, the cycle number is printed
-		between the name and the index number.
-
- If there are any cycles (circles) in the call graph, there is an
- entry for the cycle-as-a-whole.  This entry shows who called the
- cycle (as parents) and the members of the cycle (as children.)
- The `+' recursive calls entry shows the number of function calls that
- were internal to the cycle, and the calls entry for each member shows,
- for that member, how many times it was called from other members of
- the cycle.
-
-Copyright (C) 2012 Free Software Foundation, Inc.
-
-Copying and distribution of this file, with or without modification,
-are permitted in any medium without royalty provided the copyright
-notice and this notice are preserved.
-
-Index by function name
-
-   [6] alloc_2d_matrix         [3] distance                [4] read_pgm_file
-   [2] create_histogram        [5] find_closest
-Results for k=10 \n
-Flat profile:
-
-Each sample counts as 0.01 seconds.
-  %   cumulative   self              self     total           
- time   seconds   seconds    calls  ms/call  ms/call  name    
- 67.79      0.56     0.56      360     1.54     1.54  create_histogram
- 20.76      0.73     0.17    32400     0.01     0.01  distance
- 10.99      0.82     0.09      360     0.25     0.25  read_pgm_file
-  0.00      0.82     0.00      360     0.00     0.00  alloc_2d_matrix
-  0.00      0.82     0.00      180     0.00     0.95  find_closest
-
- %         the percentage of the total running time of the
-time       program used by this function.
-
-cumulative a running sum of the number of seconds accounted
- seconds   for by this function and those listed above it.
-
- self      the number of seconds accounted for by this
-seconds    function alone.  This is the major sort for this
-           listing.
-
-calls      the number of times this function was invoked, if
-           this function is profiled, else blank.
- 
- self      the average number of milliseconds spent in this
-ms/call    function per call, if this function is profiled,
-	   else blank.
-
- total     the average number of milliseconds spent in this
-ms/call    function and its descendents per call, if this 
-	   function is profiled, else blank.
-
-name       the name of the function.  This is the minor sort
-           for this listing. The index shows the location of
-	   the function in the gprof listing. If the index is
-	   in parenthesis it shows where it would appear in
-	   the gprof listing if it were to be printed.
-
-Copyright (C) 2012 Free Software Foundation, Inc.
-
-Copying and distribution of this file, with or without modification,
-are permitted in any medium without royalty provided the copyright
-notice and this notice are preserved.
-
-		     Call graph (explanation follows)
-
-
-granularity: each sample hit covers 2 byte(s) for 1.23% of 0.82 seconds
-
-index % time    self  children    called     name
-                                                 <spontaneous>
-[1]    100.0    0.00    0.82                 main [1]
-                0.56    0.00     360/360         create_histogram [2]
-                0.00    0.17     180/180         find_closest [4]
-                0.09    0.00     360/360         read_pgm_file [5]
------------------------------------------------
-                0.56    0.00     360/360         main [1]
-[2]     68.1    0.56    0.00     360         create_histogram [2]
------------------------------------------------
-                0.17    0.00   32400/32400       find_closest [4]
-[3]     20.9    0.17    0.00   32400         distance [3]
------------------------------------------------
-                0.00    0.17     180/180         main [1]
-[4]     20.9    0.00    0.17     180         find_closest [4]
-                0.17    0.00   32400/32400       distance [3]
+                0.53    0.00     360/360         main [1]
+[2]     77.9    0.53    0.00     360         create_histogram [2]
 -----------------------------------------------
                 0.09    0.00     360/360         main [1]
-[5]     11.0    0.09    0.00     360         read_pgm_file [5]
+[3]     13.2    0.09    0.00     360         read_pgm_file [3]
+                0.00    0.00     360/360         alloc_2d_matrix [6]
+-----------------------------------------------
+                0.06    0.00   11664/11664       find_closest [5]
+[4]      8.8    0.06    0.00   11664         distance [4]
+-----------------------------------------------
+                0.00    0.06     324/324         main [1]
+[5]      8.8    0.00    0.06     324         find_closest [5]
+                0.06    0.00   11664/11664       distance [4]
+-----------------------------------------------
+                0.00    0.00     360/360         read_pgm_file [3]
+[6]      0.0    0.00    0.00     360         alloc_2d_matrix [6]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+   [6] alloc_2d_matrix         [4] distance                [3] read_pgm_file
+   [2] create_histogram        [5] find_closest
+18.15.txt		18		13
+1 false out of 270
+Total runtime: 2.087428
+Results for k=5
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 72.08      0.48     0.48      360     1.32     1.32  create_histogram
+ 13.66      0.57     0.09    24300     0.00     0.00  distance
+ 12.14      0.65     0.08      360     0.22     0.22  read_pgm_file
+  0.00      0.65     0.00      360     0.00     0.00  alloc_2d_matrix
+  0.00      0.65     0.00      270     0.00     0.33  find_closest
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+ 
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this 
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 1.55% of 0.65 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]    100.0    0.00    0.65                 main [1]
+                0.48    0.00     360/360         create_histogram [2]
+                0.00    0.09     270/270         find_closest [4]
+                0.08    0.00     360/360         read_pgm_file [5]
+-----------------------------------------------
+                0.48    0.00     360/360         main [1]
+[2]     73.6    0.48    0.00     360         create_histogram [2]
+-----------------------------------------------
+                0.09    0.00   24300/24300       find_closest [4]
+[3]     14.0    0.09    0.00   24300         distance [3]
+-----------------------------------------------
+                0.00    0.09     270/270         main [1]
+[4]     14.0    0.00    0.09     270         find_closest [4]
+                0.09    0.00   24300/24300       distance [3]
+-----------------------------------------------
+                0.08    0.00     360/360         main [1]
+[5]     12.4    0.08    0.00     360         read_pgm_file [5]
+                0.00    0.00     360/360         alloc_2d_matrix [6]
+-----------------------------------------------
+                0.00    0.00     360/360         read_pgm_file [5]
+[6]      0.0    0.00    0.00     360         alloc_2d_matrix [6]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+   [6] alloc_2d_matrix         [3] distance                [5] read_pgm_file
+   [2] create_histogram        [4] find_closest
+18.15.txt		18		13
+1 false out of 234
+Total runtime: 2.371807
+Results for k=7
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 77.62      0.62     0.62      360     1.72     1.72  create_histogram
+ 12.52      0.72     0.10    29484     0.00     0.00  distance
+  6.26      0.77     0.05      360     0.14     0.14  read_pgm_file
+  1.25      0.78     0.01      234     0.04     0.47  find_closest
+  1.25      0.79     0.01                             main
+  0.00      0.79     0.00      360     0.00     0.00  alloc_2d_matrix
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+ 
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this 
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 1.26% of 0.79 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]    100.0    0.01    0.78                 main [1]
+                0.62    0.00     360/360         create_histogram [2]
+                0.01    0.10     234/234         find_closest [3]
+                0.05    0.00     360/360         read_pgm_file [5]
+-----------------------------------------------
+                0.62    0.00     360/360         main [1]
+[2]     78.5    0.62    0.00     360         create_histogram [2]
+-----------------------------------------------
+                0.01    0.10     234/234         main [1]
+[3]     13.9    0.01    0.10     234         find_closest [3]
+                0.10    0.00   29484/29484       distance [4]
+-----------------------------------------------
+                0.10    0.00   29484/29484       find_closest [3]
+[4]     12.7    0.10    0.00   29484         distance [4]
+-----------------------------------------------
+                0.05    0.00     360/360         main [1]
+[5]      6.3    0.05    0.00     360         read_pgm_file [5]
+                0.00    0.00     360/360         alloc_2d_matrix [6]
+-----------------------------------------------
+                0.00    0.00     360/360         read_pgm_file [5]
+[6]      0.0    0.00    0.00     360         alloc_2d_matrix [6]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+   [6] alloc_2d_matrix         [4] distance                [1] main
+   [2] create_histogram        [3] find_closest            [5] read_pgm_file
+0 false out of 180
+Total runtime: 2.402193
+Results for k=10
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 73.45      0.55     0.55      360     1.53     1.53  create_histogram
+ 17.36      0.68     0.13    32400     0.00     0.00  distance
+  8.01      0.74     0.06      360     0.17     0.17  read_pgm_file
+  0.00      0.74     0.00      360     0.00     0.00  alloc_2d_matrix
+  0.00      0.74     0.00      180     0.00     0.72  find_closest
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+ 
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this 
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 1.35% of 0.74 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]    100.0    0.00    0.74                 main [1]
+                0.55    0.00     360/360         create_histogram [2]
+                0.00    0.13     180/180         find_closest [4]
+                0.06    0.00     360/360         read_pgm_file [5]
+-----------------------------------------------
+                0.55    0.00     360/360         main [1]
+[2]     74.3    0.55    0.00     360         create_histogram [2]
+-----------------------------------------------
+                0.13    0.00   32400/32400       find_closest [4]
+[3]     17.6    0.13    0.00   32400         distance [3]
+-----------------------------------------------
+                0.00    0.13     180/180         main [1]
+[4]     17.6    0.00    0.13     180         find_closest [4]
+                0.13    0.00   32400/32400       distance [3]
+-----------------------------------------------
+                0.06    0.00     360/360         main [1]
+[5]      8.1    0.06    0.00     360         read_pgm_file [5]
                 0.00    0.00     360/360         alloc_2d_matrix [6]
 -----------------------------------------------
                 0.00    0.00     360/360         read_pgm_file [5]

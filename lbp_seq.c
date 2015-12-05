@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <limits.h>
 #include <float.h>
+#include <time.h>
 #include "util.h"
 
 #define num_people 18
@@ -15,8 +16,11 @@ int num_files;
 void create_histogram(int* hist, int** img, int num_rows, int num_cols);
 int find_closest(int*** training_set, int num_persons, int num_training, int size, int* test_image);
 
-int main(int argc, char** argv){
+clock_t begin, end;
+double time_spent;
 
+int main(int argc, char** argv){
+	begin = clock();
 	int i, j;
 	int b; 
 
@@ -148,6 +152,9 @@ int main(int argc, char** argv){
 	}
 	free(test_set);
 	// printf("free test set\n");
+	end = clock();
+	time_spent = (double)(end - begin);
+	printf("Total runtime: %f\n", time_spent/CLOCKS_PER_SEC);
 
 	return 0;
 }
